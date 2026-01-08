@@ -83,7 +83,8 @@ export const RevealScreen: React.FC = () => {
               fullWidth
               onClick={nextReveal}
             >
-              {revealedPlayer < currentGame.players.length - 1
+              {revealedPlayer !== null &&
+              revealedPlayer < currentGame.players.length - 1
                 ? "Joueur suivant"
                 : "Commencer la partie"}
             </Button>

@@ -78,7 +78,7 @@ export const RulesScreen: React.FC = () => {
               <li>Chaque joueur reçoit secrètement son rôle et son mot</li>
               <li>Tour à tour, décrivez votre mot en une phrase</li>
               <li>Votez pour éliminer un suspect</li>
-              <li>Le jeu continue jusqu'à la victoire d'un camp</li>
+              <li>Le jeu continue jusqu&apos;à la victoire d&apos;un camp</li>
             </ol>
           </Card>
 

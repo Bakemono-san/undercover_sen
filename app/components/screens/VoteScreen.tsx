@@ -18,7 +18,6 @@ export const VoteScreen: React.FC = () => {
   if (!currentGame) return null;
 
   const activePlayers = getActivePlayers(currentGame.players);
-  const totalVotes = Object.values(voteResults).reduce((a, b) => a + b, 0);
   const votedPlayersCount = Object.keys(voteResults).length;
 
   const handleVote = (targetId: number) => {
@@ -104,12 +103,12 @@ export const VoteScreen: React.FC = () => {
           {!selectedVoter && (
             <div className="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded-lg mb-4">
               <p className="text-sm text-yellow-800 font-semibold">
-                ⚠️ Sélectionnez d'abord qui vote ci-dessus
+                ⚠️ Sélectionnez d&apos;abord qui vote ci-dessus
               </p>
             </div>
           )}
           <div className="text-sm md:text-base text-orange-600 font-semibold text-center mb-2">
-            Qui est l'Undercover ?
+            Qui est l&apos;Undercover ?
           </div>
         </Card>
 
