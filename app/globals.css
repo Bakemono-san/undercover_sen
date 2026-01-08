@@ -1,26 +1,264 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #1a1a1a;
+
+    /* Senegalese Flag Colors - High Visibility */
+    --senegal-green: #00a86b;
+    --senegal-yellow: #ffbf00;
+    --senegal-red: #e63946;
+
+    /* Cultural Colors - Enhanced Contrast */
+    --teranga: #ff6b35;
+    --ocean: #0077be;
+    --sand: #e8a87c;
+    --sunset: #ff6b35;
+    --baobab: #a0522d;
+    --harmattan: #ff8c69;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+
+    /* Senegalese color tokens */
+    --color-senegal-green: var(--senegal-green);
+    --color-senegal-yellow: var(--senegal-yellow);
+    --color-senegal-red: var(--senegal-red);
+    --color-teranga: var(--teranga);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: default;
+}
+
+/* Enhanced cursor styles */
+button,
+a,
+[role="button"],
+.cursor-pointer {
+    cursor: pointer;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button:hover,
+a:hover,
+[role="button"]:hover {
+    transform: translateY(-1px);
+}
+
+button:active,
+a:active,
+[role="button"]:active {
+    transform: translateY(0);
+}
+
+button:disabled,
+button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+    cursor: text;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideIn {
+    animation: slideIn 0.3s ease-out;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Responsive utilities */
+.responsive-text {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+}
+
+.responsive-heading {
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(251, 146, 60, 0.5);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(251, 146, 60, 0.8);
+}
+
+/* Senegalese-inspired gradients - High Visibility */
+.bg-senegal-gradient {
+    background: linear-gradient(
+        135deg,
+        var(--senegal-green) 0%,
+        var(--senegal-yellow) 50%,
+        var(--senegal-red) 100%
+    );
+    box-shadow: 0 4px 20px rgba(0, 168, 107, 0.3);
+}
+
+.bg-teranga-gradient {
+    background: linear-gradient(135deg, var(--teranga) 0%, var(--sunset) 100%);
+    box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+}
+
+.bg-ocean-gradient {
+    background: linear-gradient(135deg, var(--ocean) 0%, #4db8e8 100%);
+}
+
+.bg-sahel-gradient {
+    background: linear-gradient(135deg, var(--sand) 0%, var(--baobab) 100%);
+}
+
+/* African pattern overlay */
+.african-pattern {
+    background-image:
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(0, 133, 63, 0.03) 10px,
+            rgba(0, 133, 63, 0.03) 20px
+        ),
+        repeating-linear-gradient(
+            -45deg,
+            transparent,
+            transparent 10px,
+            rgba(227, 27, 35, 0.03) 10px,
+            rgba(227, 27, 35, 0.03) 20px
+        );
+}
+
+/* Wax print inspired pattern */
+.wax-print-bg {
+    background-image:
+        radial-gradient(
+            circle at 25% 25%,
+            rgba(253, 239, 66, 0.1) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 75% 75%,
+            rgba(227, 27, 35, 0.1) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 133, 63, 0.05) 0%,
+            transparent 50%
+        );
+}
+
+/* Touch-friendly tap targets */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    a {
+        min-height: 44px;
+        min-width: 44px;
+    }
+}
+
+/* Glowing effect for Senegalese elements - Enhanced */
+.glow-senegal {
+    box-shadow:
+        0 0 25px rgba(0, 168, 107, 0.4),
+        0 0 45px rgba(255, 191, 0, 0.3),
+        0 0 65px rgba(230, 57, 70, 0.2);
+}
+
+.hover-glow-senegal:hover {
+    box-shadow:
+        0 0 35px rgba(0, 168, 107, 0.5),
+        0 0 55px rgba(255, 191, 0, 0.4),
+        0 0 75px rgba(230, 57, 70, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Prevent text selection on game elements */
+.no-select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Safe area insets for mobile devices */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+    }
 }
