@@ -78,6 +78,7 @@ export const GAME_CONSTANTS = {
 // Storage keys
 export const STORAGE_KEYS = {
   SAVED_PLAYERS: "undercover_saved_players",
+  CUSTOM_THEME_PACKS: "undercover_custom_theme_packs",
 } as const;
 
 // Responsive breakpoints (matching Tailwind defaults)
@@ -154,3 +155,12 @@ export const CUSTOM_WORDS_KEY = "undercover_custom_words";
 
 // Maximum custom word pairs
 export const MAX_CUSTOM_PAIRS = 50;
+
+// Icon options for theme packs
+export const THEME_PACK_ICONS = ["🎨", "🎭", "🎪", "🎯", "🎲", "🎮", "🏆", "⭐", "🌟", "💎"] as const;
+
+// Icon options for categories
+export const CATEGORY_ICONS = ["📁", "🍲", "🚌", "📍", "🎭", "🎪", "🎯", "🎲", "🎮", "⚽"] as const;
+
+// Custom theme prefix for theme IDs
+export const CUSTOM_THEME_PREFIX = "custom-" as const;

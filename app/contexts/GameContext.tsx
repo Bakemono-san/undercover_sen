@@ -152,7 +152,7 @@ export const GameProvider: React.FC<GameProviderProps> = ({ children }) => {
 
   // Launch game
   const launchGame = () => {
-    const pair = getRandomPair();
+    const pair = getRandomPair(gameConfig.theme);
     const [citizenWord, undercoverWord] = pair;
 
     const roles: { role: PlayerRole; word: string }[] = [];

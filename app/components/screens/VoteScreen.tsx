@@ -58,10 +58,10 @@ export const VoteScreen: React.FC = () => {
         <Card
           variant="default"
           padding="md"
-          className="mb-4 shadow-lg border-2 border-blue-200"
+          className="mb-4 shadow-lg border-2 border-yellow-300"
         >
           <div className="flex items-center gap-2 mb-3">
-            <User className="w-5 h-5 text-blue-600" />
+            <User className="w-5 h-5 text-orange-600" />
             <h3 className="font-bold text-base md:text-lg text-gray-900">
               1. Qui vote maintenant ?
             </h3>
@@ -79,8 +79,8 @@ export const VoteScreen: React.FC = () => {
                     hasVoted
                       ? "bg-gray-200 text-gray-500 cursor-not-allowed"
                       : isSelected
-                        ? "bg-gradient-to-br from-blue-500 to-blue-600 text-white shadow-lg scale-105"
-                        : "bg-blue-50 text-blue-700 hover:bg-blue-100 border-2 border-blue-200"
+                        ? "bg-gradient-to-br from-green-600 via-yellow-500 to-red-600 text-white shadow-lg scale-105 border-2 border-white/30"
+                        : "bg-gradient-to-r from-green-50 via-yellow-50 to-red-50 text-gray-700 hover:from-green-100 hover:via-yellow-100 hover:to-red-100 border-2 border-yellow-300"
                   }`}
                 >
                   {hasVoted ? "✓" : ""} {player.name}
@@ -93,20 +93,13 @@ export const VoteScreen: React.FC = () => {
           </p>
         </Card>
 
-        <Card variant="default" padding="md" className="mb-6 shadow-lg">
+        <Card variant="default" padding="md" className="mb-6 shadow-lg border-2 border-orange-300">
           <div className="flex items-center gap-2 mb-3">
             <Vote className="w-5 h-5 text-orange-600" />
             <h3 className="font-bold text-base md:text-lg text-gray-900">
               2. Voter contre qui ?
             </h3>
           </div>
-          {!selectedVoter && (
-            <div className="bg-yellow-50 border-l-4 border-yellow-500 p-3 rounded-lg mb-4">
-              <p className="text-sm text-yellow-800 font-semibold">
-                ⚠️ Sélectionnez d&apos;abord qui vote ci-dessus
-              </p>
-            </div>
-          )}
           <div className="text-sm md:text-base text-orange-600 font-semibold text-center mb-2">
             Qui est l&apos;Undercover ?
           </div>
@@ -124,13 +117,13 @@ export const VoteScreen: React.FC = () => {
                 disabled={!canVote}
                 className={`rounded-2xl p-4 md:p-5 text-center transition-all ${
                   canVote
-                    ? "bg-gradient-to-br from-orange-50 to-amber-50 border-2 border-orange-200 hover:border-orange-400 hover:shadow-lg active:scale-95 cursor-pointer"
+                    ? "bg-gradient-to-br from-green-50 via-yellow-50 to-red-50 border-2 border-yellow-300 hover:border-orange-400 hover:shadow-lg active:scale-95 cursor-pointer"
                     : "bg-gray-100 border-2 border-gray-200 opacity-60 cursor-not-allowed"
                 }`}
               >
-                <div className="w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full mx-auto mb-2 md:mb-3 shadow-lg relative">
+                <div className="w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-green-600 via-yellow-500 to-red-600 rounded-full mx-auto mb-2 md:mb-3 shadow-lg relative border-2 border-white/30">
                   {votes > 0 && (
-                    <div className="absolute -top-2 -right-2 w-6 h-6 md:w-7 md:h-7 bg-red-600 rounded-full flex items-center justify-center text-xs md:text-sm font-bold shadow-lg">
+                    <div className="absolute -top-2 -right-2 w-6 h-6 md:w-7 md:h-7 bg-red-600 rounded-full flex items-center justify-center text-xs md:text-sm font-bold shadow-lg border-2 border-white">
                       {votes}
                     </div>
                   )}

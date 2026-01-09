@@ -17,7 +17,7 @@ export interface GameConfig {
   theme: ThemeType;
 }
 
-export type ThemeType = "all" | "food" | "transport" | "places" | "culture";
+export type ThemeType = "all" | "food" | "transport" | "places" | "culture" | string;
 
 // Theme structure
 export interface Theme {
@@ -30,6 +30,19 @@ export interface Themes {
   transport: Theme;
   places: Theme;
   culture: Theme;
+}
+
+// Custom Theme Pack structure
+export interface CustomThemePack {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  categories: {
+    [key: string]: Theme;
+  };
+  createdAt: string;
+  updatedAt: string;
 }
 
 // Game state
@@ -70,7 +83,8 @@ export type ScreenType =
   | "vote"
   | "mrwhite"
   | "results"
-  | "wordshop";
+  | "wordshop"
+  | "themebuilder";
 
 // Vote results
 export interface VoteResults {
