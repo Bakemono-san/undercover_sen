@@ -13,6 +13,7 @@ import { VoteScreen } from "./screens/VoteScreen";
 import { MrWhiteScreen } from "./screens/MrWhiteScreen";
 import { ResultsScreen } from "./screens/ResultsScreen";
 import { WordShopScreen } from "./screens/WordShopScreen";
+import { ThemeBuilderScreen } from "./screens/ThemeBuilderScreen";
 
 export const GameContainer: React.FC = () => {
   const { screen } = useGame();
@@ -41,6 +42,8 @@ export const GameContainer: React.FC = () => {
       return <ResultsScreen />;
     case "wordshop":
       return <WordShopScreen />;
+    case "themebuilder":
+      return <ThemeBuilderScreen />;
     default:
       return <HomeScreen />;
   }

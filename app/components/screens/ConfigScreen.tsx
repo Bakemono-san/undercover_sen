@@ -1,17 +1,29 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useGame } from "../../contexts/GameContext";
 import { PageContainer, Container } from "../layout/Container";
 import { SimpleHeader } from "../layout/Header";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
-import { ChevronRight, Eye } from "lucide-react";
-import { GAME_CONSTANTS } from "../../utils/constants";
+import { ChevronRight, Eye, Palette } from "lucide-react";
+import { GAME_CONSTANTS, THEMES, STORAGE_KEYS } from "../../utils/constants";
+import { CustomThemePack } from "../../types/game";
 
 export const ConfigScreen: React.FC = () => {
   const { players, gameConfig, setGameConfig, launchGame, setScreen } =
     useGame();
+
+  const [customThemePacks, setCustomThemePacks] = useState<CustomThemePack[]>([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem(STORAGE_KEYS.CUSTOM_THEME_PACKS);
+      if (saved) {
+        setCustomThemePacks(JSON.parse(saved));
+      }
+    }
+  }, []);
 
   const incrementUndercover = () => {
     setGameConfig({
@@ -39,6 +51,21 @@ export const ConfigScreen: React.FC = () => {
       hasMrWhite: !gameConfig.hasMrWhite,
     });
   };
+
+  const selectTheme = (theme: string) => {
+    setGameConfig({
+      ...gameConfig,
+      theme,
+    });
+  };
+
+  const defaultThemes = [
+    { id: "all", name: "Tous les thèmes", icon: "🇸🇳", color: "from-green-500 via-yellow-500 to-red-500" },
+    { id: "food", name: THEMES.food.name, icon: "🍲", color: "from-orange-500 to-red-500" },
+    { id: "transport", name: THEMES.transport.name, icon: "🚌", color: "from-blue-500 to-cyan-500" },
+    { id: "places", name: THEMES.places.name, icon: "📍", color: "from-green-500 to-emerald-500" },
+    { id: "culture", name: THEMES.culture.name, icon: "🎭", color: "from-purple-500 to-pink-500" },
+  ];
 
   return (
     <PageContainer background="gradient-warm" className="wax-print-bg">
@@ -197,6 +224,74 @@ export const ConfigScreen: React.FC = () => {
                 )}
               </div>
             </div>
+          </Card>
+
+          {/* Theme Selection */}
+          <Card
+            variant="default"
+            padding="md"
+            className="bg-white shadow-2xl border-3 border-purple-300"
+          >
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b-2 border-purple-200">
+              <div className="w-10 h-10 bg-gradient-to-br from-pink-700 to-purple-700 rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg">
+                <Palette className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h3 className="font-bold text-base md:text-lg text-gray-900">
+                  🎨 Sélection du Thème
+                </h3>
+                <p className="text-xs text-gray-600 font-medium">
+                  Choisis ton pack de mots
+                </p>
+              </div>
+            </div>
+
+            {/* Default Themes */}
+            <div className="space-y-2 mb-4">
+              <h4 className="text-sm font-bold text-gray-700 mb-2">Thèmes par défaut</h4>
+              <div className="grid grid-cols-2 gap-2">
+                {defaultThemes.map((theme) => (
+                  <button
+                    key={theme.id}
+                    onClick={() => selectTheme(theme.id)}
+                    className={`p-3 rounded-xl text-sm font-medium transition-all ${
+                      gameConfig.theme === theme.id
+                        ? `bg-gradient-to-r ${theme.color} text-white shadow-lg scale-105 border-2 border-white`
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    <div className="text-lg mb-1">{theme.icon}</div>
+                    <div className="text-xs">{theme.name}</div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Custom Theme Packs */}
+            {customThemePacks.length > 0 && (
+              <div className="space-y-2">
+                <h4 className="text-sm font-bold text-gray-700 mb-2">Packs personnalisés</h4>
+                <div className="grid grid-cols-2 gap-2">
+                  {customThemePacks.map((pack) => (
+                    <button
+                      key={pack.id}
+                      onClick={() => selectTheme(`custom-${pack.id}`)}
+                      className={`p-3 rounded-xl text-sm font-medium transition-all ${
+                        gameConfig.theme === `custom-${pack.id}`
+                          ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105 border-2 border-white"
+                          : "bg-gradient-to-r from-purple-100 to-pink-100 text-gray-700 hover:from-purple-200 hover:to-pink-200"
+                      }`}
+                    >
+                      <div className="text-lg mb-1">{pack.icon}</div>
+                      <div className="text-xs truncate">{pack.name}</div>
+                      <div className="text-[10px] opacity-75 mt-1">
+                        {Object.keys(pack.categories).length} cat.
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </Card>
 
           {/* Launch Button */}

@@ -9,3 +9,4 @@ export { VoteScreen } from "./VoteScreen";
 export { MrWhiteScreen } from "./MrWhiteScreen";
 export { ResultsScreen } from "./ResultsScreen";
 export { WordShopScreen } from "./WordShopScreen";
+export { ThemeBuilderScreen } from "./ThemeBuilderScreen";

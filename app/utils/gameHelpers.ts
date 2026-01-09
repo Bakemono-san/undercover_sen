@@ -61,12 +61,48 @@ export const getRoleLabel = (role: PlayerRole): string => {
 };
 
 /**
- * Get all word pairs from themes including custom pairs
+ * Get all word pairs from themes including custom pairs and selected theme
  */
-export const getAllPairs = (): [string, string][] => {
-  const defaultPairs = Object.values(THEMES).flatMap((theme) => theme.pairs);
+export const getAllPairs = (themeType?: string): [string, string][] => {
+  let pairs: [string, string][] = [];
 
-  // Load custom pairs from localStorage
+  // Check if it's a custom theme pack
+  if (themeType && themeType.startsWith("custom-")) {
+    const themeId = themeType.replace("custom-", "");
+    if (typeof window !== "undefined") {
+      try {
+        const customPacksJSON = localStorage.getItem("undercover_custom_theme_packs");
+        if (customPacksJSON) {
+          const customPacks = JSON.parse(customPacksJSON);
+          const selectedPack = customPacks.find((pack: any) => pack.id === themeId);
+          if (selectedPack) {
+            // Get all pairs from all categories in the custom pack
+            Object.values(selectedPack.categories).forEach((category: any) => {
+              pairs.push(...category.pairs);
+            });
+            return pairs;
+          }
+        }
+      } catch (e) {
+        console.error("Failed to load custom theme pack", e);
+      }
+    }
+  }
+
+  // Handle default themes
+  if (!themeType || themeType === "all") {
+    pairs = Object.values(THEMES).flatMap((theme) => theme.pairs);
+  } else if (themeType === "food") {
+    pairs = THEMES.food.pairs;
+  } else if (themeType === "transport") {
+    pairs = THEMES.transport.pairs;
+  } else if (themeType === "places") {
+    pairs = THEMES.places.pairs;
+  } else if (themeType === "culture") {
+    pairs = THEMES.culture.pairs;
+  }
+
+  // Load custom word pairs from WordShop (legacy feature)
   if (typeof window !== "undefined") {
     try {
       const customPairsJSON = localStorage.getItem("undercover_custom_words");
@@ -75,21 +111,29 @@ export const getAllPairs = (): [string, string][] => {
         const customWordPairs: [string, string][] = customPairs.map(
           (pair: { word1: string; word2: string }) => [pair.word1, pair.word2],
         );
-        return [...defaultPairs, ...customWordPairs];
+        // Only add custom word pairs if using "all" theme
+        if (!themeType || themeType === "all") {
+          pairs = [...pairs, ...customWordPairs];
+        }
       }
     } catch (e) {
       console.error("Failed to load custom words", e);
     }
   }
 
-  return defaultPairs;
+  return pairs;
 };
 
 /**
- * Get a random word pair
+ * Get a random word pair based on selected theme
  */
-export const getRandomPair = (): [string, string] => {
-  const allPairs = getAllPairs();
+export const getRandomPair = (themeType?: string): [string, string] => {
+  const allPairs = getAllPairs(themeType);
+  if (allPairs.length === 0) {
+    // Fallback to all default themes if no pairs found
+    const fallbackPairs = getAllPairs("all");
+    return fallbackPairs[Math.floor(Math.random() * fallbackPairs.length)];
+  }
   return allPairs[Math.floor(Math.random() * allPairs.length)];
 };
 

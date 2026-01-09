@@ -16,6 +16,7 @@ import {
   Menu as MenuIcon,
   X,
   PackagePlus,
+  Palette,
 } from "lucide-react";
 
 export const HomeScreen: React.FC = () => {
@@ -29,6 +30,13 @@ export const HomeScreen: React.FC = () => {
   } = useGame();
 
   const menuItems = [
+    {
+      icon: Palette,
+      label: "Créateur de Thèmes",
+      description: "Créer des packs personnalisés",
+      onClick: () => setScreen("themebuilder"),
+      color: "text-pink-600",
+    },
     {
       icon: PackagePlus,
       label: "Boutique de Mots",

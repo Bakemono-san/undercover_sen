@@ -78,6 +78,7 @@ export const GAME_CONSTANTS = {
 // Storage keys
 export const STORAGE_KEYS = {
   SAVED_PLAYERS: "undercover_saved_players",
+  CUSTOM_THEME_PACKS: "undercover_custom_theme_packs",
 } as const;
 
 // Responsive breakpoints (matching Tailwind defaults)
