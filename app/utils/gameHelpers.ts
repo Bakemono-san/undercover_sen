@@ -1,4 +1,4 @@
-import { PlayerRole, Player, CurrentGame } from "../types/game";
+import { PlayerRole, Player, CurrentGame, CustomThemePack, Theme } from "../types/game";
 import { ROLE_COLORS, ROLE_LABELS, THEMES } from "./constants";
 import { Shield, Eye, Crown } from "lucide-react";
 
@@ -73,11 +73,11 @@ export const getAllPairs = (themeType?: string): [string, string][] => {
       try {
         const customPacksJSON = localStorage.getItem("undercover_custom_theme_packs");
         if (customPacksJSON) {
-          const customPacks = JSON.parse(customPacksJSON);
-          const selectedPack = customPacks.find((pack: any) => pack.id === themeId);
+          const customPacks: CustomThemePack[] = JSON.parse(customPacksJSON);
+          const selectedPack = customPacks.find((pack) => pack.id === themeId);
           if (selectedPack) {
             // Get all pairs from all categories in the custom pack
-            Object.values(selectedPack.categories).forEach((category: any) => {
+            Object.values(selectedPack.categories).forEach((category: Theme) => {
               pairs.push(...category.pairs);
             });
             return pairs;

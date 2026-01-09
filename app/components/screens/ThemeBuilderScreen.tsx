@@ -18,7 +18,7 @@ import {
   Folder,
   FileText,
 } from "lucide-react";
-import { STORAGE_KEYS } from "../../utils/constants";
+import { STORAGE_KEYS, THEME_PACK_ICONS, CATEGORY_ICONS } from "../../utils/constants";
 import { CustomThemePack } from "../../types/game";
 
 interface CategoryWithPairs {
@@ -26,6 +26,20 @@ interface CategoryWithPairs {
   icon: string;
   pairs: [string, string][];
 }
+
+/**
+ * Generate a unique ID using timestamp and random string
+ */
+const generateUniqueId = (): string => {
+  return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+};
+
+/**
+ * Normalize category key (lowercase, replace spaces with underscores)
+ */
+const normalizeCategoryKey = (key: string): string => {
+  return key.toLowerCase().replace(/\s+/g, "_");
+};
 
 export const ThemeBuilderScreen: React.FC = () => {
   const { setScreen } = useGame();
@@ -59,8 +73,8 @@ export const ThemeBuilderScreen: React.FC = () => {
     word2: "",
   });
 
-  const iconOptions = ["🎨", "🎭", "🎪", "🎯", "🎲", "🎮", "🏆", "⭐", "🌟", "💎"];
-  const categoryIconOptions = ["📁", "🍲", "🚌", "📍", "🎭", "🎪", "🎯", "🎲", "🎮", "⚽"];
+  const iconOptions = [...THEME_PACK_ICONS];
+  const categoryIconOptions = [...CATEGORY_ICONS];
 
   useEffect(() => {
     saveToLocalStorage(customThemePacks);
@@ -79,7 +93,7 @@ export const ThemeBuilderScreen: React.FC = () => {
     }
 
     const theme: CustomThemePack = {
-      id: Date.now().toString(),
+      id: generateUniqueId(),
       name: newTheme.name.trim(),
       description: newTheme.description.trim(),
       icon: newTheme.icon,
@@ -246,7 +260,7 @@ export const ThemeBuilderScreen: React.FC = () => {
       try {
         const imported = JSON.parse(e.target?.result as string) as CustomThemePack;
         // Generate new ID to avoid conflicts
-        imported.id = Date.now().toString();
+        imported.id = generateUniqueId();
         imported.createdAt = new Date().toISOString();
         imported.updatedAt = new Date().toISOString();
         setCustomThemePacks([...customThemePacks, imported]);
@@ -501,7 +515,7 @@ export const ThemeBuilderScreen: React.FC = () => {
                       type="text"
                       value={newCategory.key}
                       onChange={(e) =>
-                        setNewCategory({ ...newCategory, key: e.target.value.toLowerCase().replace(/\s+/g, "_") })
+                        setNewCategory({ ...newCategory, key: normalizeCategoryKey(e.target.value) })
                       }
                       className="w-full bg-white border-2 border-blue-200 rounded-xl px-4 py-3 font-medium focus:border-blue-400 focus:outline-none text-gray-900"
                       placeholder="Ex: plats_principaux"
