@@ -34,21 +34,21 @@ export const DiscussionScreen: React.FC = () => {
           <h2 className="text-xl md:text-2xl font-bold text-gray-900">
             Manche {currentGame.round}
           </h2>
-          <div className="bg-green-600 px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-bold">
+          <div className="bg-gradient-to-r from-green-600 via-yellow-500 to-red-600 px-3 md:px-4 py-2 rounded-full text-xs md:text-sm font-bold text-white shadow-lg border-2 border-white/30">
             DISCUSSION
           </div>
         </div>
 
         <Card variant="glass" padding="lg" className="mb-6">
           <Timer time={discussionTimer} size="lg" label="Temps de discussion" />
-          <div className="mt-4 text-center text-sm md:text-base text-green-300 font-semibold">
+          <div className="mt-4 text-center text-sm md:text-base text-white font-semibold bg-gradient-to-r from-yellow-500 to-orange-500 py-2 rounded-lg">
             DÉCRIS TON MOT SANS LE DIRE
           </div>
         </Card>
 
-        <Card variant="default" padding="md" className="mb-6 shadow-lg">
+        <Card variant="default" padding="md" className="mb-6 shadow-lg border-2 border-yellow-300">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Users className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
+            <Users className="w-5 h-5 md:w-6 md:h-6 text-orange-600" />
             <span className="font-bold text-base md:text-lg text-gray-900">
               Joueurs actifs
             </span>
@@ -58,7 +58,7 @@ export const DiscussionScreen: React.FC = () => {
               const Icon = player.role ? getRoleIcon(player.role) : Users;
               return (
                 <div key={player.id} className="text-center">
-                  <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full mx-auto mb-2 shadow-lg flex items-center justify-center">
+                  <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-green-600 via-yellow-500 to-red-600 rounded-full mx-auto mb-2 shadow-lg flex items-center justify-center border-2 border-white/30">
                     <Icon className="w-6 h-6 md:w-7 md:h-7 text-white" />
                   </div>
                   <div className="text-xs md:text-sm truncate text-gray-900">
