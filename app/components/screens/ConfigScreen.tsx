@@ -7,7 +7,7 @@ import { SimpleHeader } from "../layout/Header";
 import { Button } from "../ui/Button";
 import { Card } from "../ui/Card";
 import { ChevronRight, Eye, Palette } from "lucide-react";
-import { GAME_CONSTANTS, THEMES, STORAGE_KEYS } from "../../utils/constants";
+import { GAME_CONSTANTS, THEMES, STORAGE_KEYS, CUSTOM_THEME_PREFIX } from "../../utils/constants";
 import { CustomThemePack } from "../../types/game";
 
 export const ConfigScreen: React.FC = () => {
@@ -275,9 +275,9 @@ export const ConfigScreen: React.FC = () => {
                   {customThemePacks.map((pack) => (
                     <button
                       key={pack.id}
-                      onClick={() => selectTheme(`custom-${pack.id}`)}
+                      onClick={() => selectTheme(`${CUSTOM_THEME_PREFIX}${pack.id}`)}
                       className={`p-3 rounded-xl text-sm font-medium transition-all ${
-                        gameConfig.theme === `custom-${pack.id}`
+                        gameConfig.theme === `${CUSTOM_THEME_PREFIX}${pack.id}`
                           ? "bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-lg scale-105 border-2 border-white"
                           : "bg-gradient-to-r from-purple-100 to-pink-100 text-gray-700 hover:from-purple-200 hover:to-pink-200"
                       }`}

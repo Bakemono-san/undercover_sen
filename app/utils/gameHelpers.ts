@@ -1,5 +1,5 @@
 import { PlayerRole, Player, CurrentGame, CustomThemePack, Theme } from "../types/game";
-import { ROLE_COLORS, ROLE_LABELS, THEMES } from "./constants";
+import { ROLE_COLORS, ROLE_LABELS, THEMES, CUSTOM_THEME_PREFIX } from "./constants";
 import { Shield, Eye, Crown } from "lucide-react";
 
 /**
@@ -67,8 +67,8 @@ export const getAllPairs = (themeType?: string): [string, string][] => {
   let pairs: [string, string][] = [];
 
   // Check if it's a custom theme pack
-  if (themeType && themeType.startsWith("custom-")) {
-    const themeId = themeType.replace("custom-", "");
+  if (themeType && themeType.startsWith(CUSTOM_THEME_PREFIX)) {
+    const themeId = themeType.replace(CUSTOM_THEME_PREFIX, "");
     if (typeof window !== "undefined") {
       try {
         const customPacksJSON = localStorage.getItem("undercover_custom_theme_packs");
@@ -132,6 +132,10 @@ export const getRandomPair = (themeType?: string): [string, string] => {
   if (allPairs.length === 0) {
     // Fallback to all default themes if no pairs found
     const fallbackPairs = getAllPairs("all");
+    if (fallbackPairs.length === 0) {
+      // Ultimate fallback: return first pair from food theme
+      return THEMES.food.pairs[0];
+    }
     return fallbackPairs[Math.floor(Math.random() * fallbackPairs.length)];
   }
   return allPairs[Math.floor(Math.random() * allPairs.length)];

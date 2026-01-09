@@ -161,3 +161,6 @@ export const THEME_PACK_ICONS = ["🎨", "🎭", "🎪", "🎯", "🎲", "🎮",
 
 // Icon options for categories
 export const CATEGORY_ICONS = ["📁", "🍲", "🚌", "📍", "🎭", "🎪", "🎯", "🎲", "🎮", "⚽"] as const;
+
+// Custom theme prefix for theme IDs
+export const CUSTOM_THEME_PREFIX = "custom-" as const;
