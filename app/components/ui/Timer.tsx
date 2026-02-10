@@ -33,9 +33,9 @@ const sizeStyles = {
 };
 
 const variantStyles = {
-  default: "text-white",
-  warning: "text-yellow-400",
-  danger: "text-red-400",
+  default: "text-[--senegal-green]",
+  warning: "text-[--senegal-yellow]",
+  danger: "text-[--senegal-red]",
 };
 
 export const Timer: React.FC<TimerProps> = ({
@@ -130,13 +130,12 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
       {showProgress && (
         <div className="mt-4 w-full bg-white/10 rounded-full h-2 overflow-hidden">
           <div
-            className={`h-full transition-all duration-1000 ${
-              isDanger
-                ? "bg-red-500"
+            className={`h-full transition-all duration-1000 ${isDanger
+                ? "bg-[--senegal-red]"
                 : isWarning
-                  ? "bg-yellow-500"
-                  : "bg-green-500"
-            }`}
+                  ? "bg-[--senegal-yellow]"
+                  : "bg-[--senegal-green]"
+              }`}
             style={{ width: `${percentage}%` }}
           />
         </div>
