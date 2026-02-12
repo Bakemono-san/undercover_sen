@@ -80,15 +80,15 @@ export const RoleDescription: React.FC<RoleDescriptionProps> = ({
   return (
     <div className={`text-center ${className}`}>
       <RoleBadge role={role} size="lg" className="mb-3" />
-      <p className="text-gray-300 text-sm mb-4">{descriptions[role]}</p>
+      <p className="text-orange-950 text-sm mb-4">{descriptions[role]}</p>
       {word !== undefined && (
         <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
-          <p className="text-xs text-gray-400 mb-1">Votre mot :</p>
-          <p className="text-2xl md:text-3xl font-black text-orange-400">
+          <p className="text-xs text-orange-950 mb-1">Votre mot :</p>
+          <p className="text-2xl md:text-3xl font-black text-orange-600">
             {word || "???"}
           </p>
           {!word && (
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-orange-950 mt-2">
               Vous devez deviner le mot des citoyens
             </p>
           )}

@@ -52,6 +52,8 @@ export const VoteScreen: React.FC = () => {
           showBack
           onBack={() => setScreen("discussion")}
           variant="dark"
+          className="bg-senegal-gradient rounded-xl shadow-lg mb-6 text-white"
+          
         />
 
         {/* Voter Selection */}
